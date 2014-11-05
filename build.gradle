@@ -1,0 +1,65 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.7
+
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile (    		 	
+    		'io.netty:netty-all:4.0.24.Final'
+    		,'com.google.code.gson:gson:2.3'
+    		,'redis.clients:jedis:2.6.0'
+    		, fileTree(dir: 'local-lib', include: '**/*.jar')    		
+    		)
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+}
+
+test {
+    systemProperties 'property': 'value'
+}
+
+uploadArchives {
+    repositories {
+       flatDir {
+           dirs 'repos'
+       }
+    }
+}
+
+task listJars << {
+    configurations.compile.each { File file -> println file.name }
+}
+
+task printClasspathStringJars << {   
+    println getClasspathStringJars()
+}
+
+def getClasspathStringJars() {
+	def baseFolder = 'deps/'
+    def fileNames = []
+    configurations.compile.each { File file -> fileNames.add(baseFolder + file.name) }
+    
+    def classpath = fileNames.join(" ; ")    
+    return classpath
+}
+
+task copyRuntimeLibs(type: Copy) {  
+  into "build/libs/deps"  
+  from configurations.compile  
+}
+
+jar {
+	def classpath = '. ; ' + getClasspathStringJars() + ' ; '
+    manifest {
+        attributes ('Implementation-Title': 'hello grandle', 
+        			'Implementation-Version': version ,
+        			'Main-Class': 'org.gradle.MainApp',
+        			'Class-Path' : classpath)
+        
+    }
+}
