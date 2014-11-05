@@ -3,6 +3,14 @@ netty-with-gradle
 
 Demo Simple Java Project with Gradle Build System and Continuous Performance Unit Testing (CPUT)
 
+![alt tag](https://dl.dropboxusercontent.com/u/4074962/mc2ads/resources/images/netty-stress-test-report.png "Continuous Performance Unit Testing")
+
+How to build with Gradle:
+* run the task "jar"
+* run the task "copyRuntimeLibs"
+* cd build/libs
+* exec /usr/lib/jvm/jdk1.8.0_20/bin/java -jar netty-with-gradle-1.0.jar
+
 Refer links: 
 * Why Build Your Java Projects with Gradle ? http://www.drdobbs.com/jvm/why-build-your-java-projects-with-gradle/240168608
 * Gradle – Create A Jar File With Dependencies http://www.mkyong.com/gradle/gradle-create-a-jar-file-with-dependencies/

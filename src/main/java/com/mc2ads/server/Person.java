@@ -1,4 +1,4 @@
-package org.gradle;
+package com.mc2ads.server;
 
 import com.google.gson.Gson;
 
