@@ -17,7 +17,6 @@ public class SimpleHttpServer {
 	final protected boolean isAddressAlreadyInUse(String host, int port) {
 		int timeout = 500;
 		try {
-			// System.out.println(" check "+workerInfo.getName());
 			Socket socket = new Socket();
 			socket.connect(new InetSocketAddress(host, port), timeout);
 			socket.close();
@@ -44,7 +43,7 @@ public class SimpleHttpServer {
 		return null;
 	}
 
-	final public void registerWorkerHttpHandler(String host, int port,
+	final public void registerHttpHandler(String host, int port,
 			Handler<HttpServerRequest> handler) {
 		HttpServer server = checkAndCreateHttpServer(host, port);
 		if (server == null) {
